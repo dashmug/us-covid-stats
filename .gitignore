@@ -1,0 +1,21 @@
+# Distribution / packaging
+.envrc
+.python-version
+
+__pycache__
+
+.serverless
+
+node_modules
+
+.coverage
+coverage.xml
+htmlcov
+
+.mypy_cache
+
+frontend/build
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local

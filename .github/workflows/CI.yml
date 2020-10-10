@@ -1,0 +1,136 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.5.0
+        with:
+          access_token: ${{ github.token }}
+
+      - uses: actions/checkout@v2.3.3
+
+      - name: Setup Virtualenv Cache
+        uses: actions/cache@v2.1.1
+        id: virtualenv-cache
+        with:
+          path: ~/.cache/pypoetry/virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2.1.3
+        with:
+          python-version: 3.8
+
+      - name: Setup Poetry
+        uses: Gr1N/setup-poetry@v3
+
+      - name: Install Python Dependencies
+        if: steps.virtualenv-cache.outputs.cache-hit != 'true'
+        run: make venv
+
+      - name: Lint with Flake8
+        run: make flake8
+
+      - name: Lint with Black
+        run: make black_check
+
+      - name: Checking type annotations
+        run: make typecheck
+
+      - name: Set up Node 12.x
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: '12.x'
+
+      - name: Get npm cache directory
+        id: npm-cache
+        run: echo "::set-output name=dir::$(npm config get cache)"
+
+      - name: Setup NPM cache
+        uses: actions/cache@v2.1.0
+        with:
+          path: ${{ steps.npm-cache.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Set up node_modules cache
+        uses: actions/cache@v2.1.0
+        id: node-modules-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+            ${{ runner.os }}-
+
+      - name: Install Node dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: make node_modules
+
+      - name: Set up Serverless cache
+        uses: actions/cache@v2.1.0
+        with:
+          path: ~/.cache/serverless-python-requirements
+          key: ${{ runner.os }}-serverless-python-requirements-${{ hashFiles('poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-serverless-python-requirements
+            ${{ runner.os }}-
+
+      - name: Build serverless package
+        run: make build
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.5.0
+        with:
+          access_token: ${{ github.token }}
+
+      - uses: actions/checkout@v2.3.3
+
+      - name: Set up Node 12.x
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: '12.x'
+
+      - name: Get npm cache directory
+        id: npm-cache
+        run: echo "::set-output name=dir::$(npm config get cache)"
+
+      - name: Setup NPM cache
+        uses: actions/cache@v2.1.0
+        with:
+          path: ${{ steps.npm-cache.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Set up node_modules cache
+        uses: actions/cache@v2.1.0
+        id: node-modules-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+            ${{ runner.os }}-
+
+      - name: Install Node dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: make node_modules
+
+      - name: Build frontend artifacts
+        run: make build

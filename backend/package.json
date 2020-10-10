@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "0.1.0",
+  "description": "#CloudGuruChallenge (Sept. 2020) - Event-Driven Python",
+  "main": "serverless.yml",
+  "author": "Noel Llevares <noelmartin@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "serverless": "2.6.0",
+    "serverless-python-requirements": "5.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged --verbose --debug && poetry run mypy",
+      "pre-push": "poetry run python -m pytest && sls package"
+    }
+  },
+  "lint-staged": {
+    "*.py": [
+      "poetry run autopep8 --in-place",
+      "poetry run flake8",
+      "poetry run black"
+    ]
+  },
+  "scripts": {
+    "build": "sls package",
+    "deploy": "sls deploy --verbose"
+  }
+}
