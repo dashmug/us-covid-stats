@@ -8,9 +8,6 @@ const App = () => (
     <section className="container">
       <h1>US COVID Daily Cases</h1>
       <ChartFromAPI url={`${BACKEND_URL}/data`} />
-      <a href={`${BACKEND_URL}/csv`} target="_blank" rel="noopener noreferrer">
-        Download CSV.
-      </a>
     </section>
 
     <footer className="footer">
