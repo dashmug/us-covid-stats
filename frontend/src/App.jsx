@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import ChartFromAPI from "./ChartFromAPI";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -9,9 +8,6 @@ const App = () => (
     <section className="container">
       <h1>US COVID Daily Cases</h1>
       <ChartFromAPI url={`${BACKEND_URL}/data`} />
-      <a href={`${BACKEND_URL}/csv`} target="_blank" rel="noopener noreferrer">
-        Download CSV.
-      </a>
     </section>
 
     <footer className="footer">
