@@ -73,10 +73,10 @@ jobs:
         uses: actions/cache@v2.1.0
         id: node-modules-cache
         with:
-          path: node_modules
+          path: backend/node_modules
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-modules-
+            ${{ runner.os }}-node-modules-backend
             ${{ runner.os }}-
 
       - name: Install Node dependencies
@@ -128,10 +128,10 @@ jobs:
         uses: actions/cache@v2.1.0
         id: node-modules-cache
         with:
-          path: node_modules
+          path: frontend/node_modules
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-modules-
+            ${{ runner.os }}-node-modules-frontend
             ${{ runner.os }}-
 
       - name: Install Node dependencies
