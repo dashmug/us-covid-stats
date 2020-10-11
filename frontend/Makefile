@@ -25,13 +25,10 @@ install: node_modules ## Setup project for local development.
 
 .PHONY: build
 build: ## Build production artifact.
-	@$(eval REACT_APP_BACKEND_URL:=$(shell aws ssm get-parameter --name REACT_APP_BACKEND_URL --query Parameter.Value --output text))
-	@REACT_APP_BACKEND_URL=$(REACT_APP_BACKEND_URL) npm run build
+	yarn build
 
 
 .PHONY: deploy
 deploy: build ## Deploy the frontend.
-	@$(eval FRONTEND_BUCKET:=$(shell aws ssm get-parameter --name FRONTEND_BUCKET --query Parameter.Value --output text))
 	@aws s3 sync build s3://$(FRONTEND_BUCKET) --delete
-	@$(eval FRONTEND_DISTRIBUTION:=$(shell aws ssm get-parameter --name FRONTEND_DISTRIBUTION --query Parameter.Value --output text))
 	@aws cloudfront create-invalidation --distribution-id=$(FRONTEND_DISTRIBUTION) --paths=/*
