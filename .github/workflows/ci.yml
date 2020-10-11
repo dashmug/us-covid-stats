@@ -57,7 +57,31 @@ jobs:
         with:
           node-version: '12.x'
 
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Set up Yarn cache
+        uses: actions/cache@v2.1.0
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-
+
+      - name: Set up node_modules cache
+        uses: actions/cache@v2.1.0
+        id: node-modules-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('backend/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-backend
+            ${{ runner.os }}-
+
       - name: Install Node dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: make node_modules
 
       - name: Set up Serverless cache
@@ -89,7 +113,31 @@ jobs:
         with:
           node-version: '12.x'
 
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Set up Yarn cache
+        uses: actions/cache@v2.1.0
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-
+
+      - name: Set up node_modules cache
+        uses: actions/cache@v2.1.0
+        id: node-modules-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('frontend/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-frontend
+            ${{ runner.os }}-
+
       - name: Install Node dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: make node_modules
 
       - name: Build frontend artifacts

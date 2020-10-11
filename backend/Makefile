@@ -21,7 +21,7 @@ venv: ## Install python dependencies.
 
 
 node_modules: ## Install node dependencies.
-	@npm ci
+	@yarn install --frozen-lockfile
 
 
 .PHONY: install
@@ -73,9 +73,9 @@ clean: ## Delete the deployment package.
 
 .PHONY: build
 build: clean ## Build the deployment package.
-	@npm run build
+	@yarn build
 
 
 .PHONY: deploy
 deploy: build ## Deploy the backend services.
-	@npm run deploy
+	@yarn deploy
