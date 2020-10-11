@@ -20,9 +20,9 @@ def get_all_cases() -> Iterable[CaseData]:
     for case in query_all(pk=CASES_PK):
         yield CaseData(
             date=case["sk"],
-            cases=int(case["cases"]),
-            deaths=int(case["deaths"]),
-            recoveries=int(case["recoveries"]),
+            cases=case["cases"],
+            deaths=case["deaths"],
+            recoveries=case["recoveries"],
         )
 
 
