@@ -63,13 +63,24 @@ functions:
     handler: us_covid_stats/etl/handler.refresh_data_from_sources
     events:
       - schedule: rate(1 day)
-
   GetData:
     handler: us_covid_stats/rest/handler.get_data
     events:
       - httpApi:
           method: GET
           path: /data
+  GetWeekly:
+    handler: us_covid_stats/rest/handler.get_weekly
+    events:
+      - httpApi:
+          method: GET
+          path: /weekly
+  GetMonthly:
+    handler: us_covid_stats/rest/handler.get_monthly
+    events:
+      - httpApi:
+          method: GET
+          path: /monthly
 
 resources:
   Resources:
