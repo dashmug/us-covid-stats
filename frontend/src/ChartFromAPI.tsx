@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Chart from "./Chart";
 
-const ChartFromAPI = ({ url }) => {
+const ChartFromAPI = ({ url }: { url: string }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {

@@ -1,7 +1,14 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
-const Chart = ({ data }) => {
+interface CaseData {
+    date: string
+    cases: [number, number][]
+    recoveries: [number, number][]
+    deaths: [number, number][]
+}
+
+const Chart = ({ data }: { data: CaseData[]}) => {
   const series = [
     {
       name: "Total Cases",
@@ -31,7 +38,7 @@ const Chart = ({ data }) => {
     colors: ["#008FFB", "#00E396", "#FF4560"],
     yaxis: {
       labels: {
-        formatter: (val) => val.toLocaleString(),
+        formatter: (val: number) => val.toLocaleString(),
         minWidth: 100,
       },
       title: {
@@ -43,7 +50,7 @@ const Chart = ({ data }) => {
     },
     tooltip: {
       y: {
-        formatter: (val) => val.toLocaleString(),
+        formatter: (val: number) => val.toLocaleString(),
       },
     },
   };
