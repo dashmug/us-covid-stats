@@ -57,40 +57,8 @@ jobs:
         with:
           node-version: '12.x'
 
-      - name: Get npm cache directory
-        id: npm-cache
-        run: echo "::set-output name=dir::$(npm config get cache)"
-
-      - name: Setup NPM cache
-        uses: actions/cache@v2.1.0
-        with:
-          path: ${{ steps.npm-cache.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Set up node_modules cache
-        uses: actions/cache@v2.1.0
-        id: node-modules-cache
-        with:
-          path: backend/node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-backend
-            ${{ runner.os }}-
-
       - name: Install Node dependencies
-        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: make node_modules
-
-      - name: Set up Serverless cache
-        uses: actions/cache@v2.1.0
-        with:
-          path: ~/.cache/serverless-python-requirements
-          key: ${{ runner.os }}-serverless-python-requirements-${{ hashFiles('poetry.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-serverless-python-requirements
-            ${{ runner.os }}-
 
       - name: Build serverless package
         run: make build
@@ -112,30 +80,7 @@ jobs:
         with:
           node-version: '12.x'
 
-      - name: Get npm cache directory
-        id: npm-cache
-        run: echo "::set-output name=dir::$(npm config get cache)"
-
-      - name: Setup NPM cache
-        uses: actions/cache@v2.1.0
-        with:
-          path: ${{ steps.npm-cache.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Set up node_modules cache
-        uses: actions/cache@v2.1.0
-        id: node-modules-cache
-        with:
-          path: frontend/node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-frontend
-            ${{ runner.os }}-
-
       - name: Install Node dependencies
-        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: make node_modules
 
       - name: Build frontend artifacts
