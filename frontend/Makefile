@@ -16,7 +16,7 @@ help: ## Show help (default).
 
 
 node_modules: ## Install node dependencies.
-	@npm ci
+	@yarn install --frozen-lockfile
 
 
 .PHONY: install
