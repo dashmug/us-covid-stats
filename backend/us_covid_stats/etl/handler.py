@@ -11,11 +11,3 @@ def refresh_data_from_sources(event: Any, context: Any) -> str:
     transformed = merge_cases_with_recoveries(**extracted)
 
     return load_data_to_database(transformed)
-
-
-def on_refresh_success(event: Any, context: Any) -> None:
-    logger.info(event)
-
-
-def on_refresh_failure(event: Any, context: Any) -> None:
-    logger.info(event)

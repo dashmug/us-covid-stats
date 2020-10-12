@@ -2,12 +2,12 @@ from pandas import DataFrame
 
 from us_covid_stats.infrastructure.s3 import MissingFileError
 from us_covid_stats.repositories.cases import CaseData, save_cases
-from us_covid_stats.repositories.csv import get_csv, save_csv
+from us_covid_stats.repositories.csv import s3_csv_to_dataframe, dataframe_to_s3_csv
 
 
 def load_data_to_database(latest_data: DataFrame) -> str:
     try:
-        old_data: DataFrame = get_csv()
+        old_data: DataFrame = s3_csv_to_dataframe()
     except MissingFileError:
         df = latest_data
     else:
@@ -33,6 +33,6 @@ def load_data_to_database(latest_data: DataFrame) -> str:
     )
 
     save_cases(new_cases)
-    save_csv(latest_data)
+    dataframe_to_s3_csv(latest_data)
 
-    return f"Update successful. {len(df.index)}"
+    return f"Update successful. {len(df.index)} row(s) updated."

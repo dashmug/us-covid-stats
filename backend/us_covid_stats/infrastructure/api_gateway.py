@@ -1,4 +1,11 @@
-from typing import Any, Mapping
+from typing import Any, Mapping, TypedDict
+
+
+class Response(TypedDict):
+    body: str
+    isBase64Encoded: bool
+    statusCode: int
+    headers: Mapping[str, str]
 
 
 def create_response(
@@ -6,7 +13,7 @@ def create_response(
     content_type: str,
     is_base64: bool = False,
     status_code: int = 200,
-) -> Mapping[str, Any]:
+) -> Response:
 
     return {
         "body": body,

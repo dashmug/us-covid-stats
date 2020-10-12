@@ -148,7 +148,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.3
 
-      - name: cfn-lint
+      - name: Lint CloudFormation files
         uses: scottbrenner/cfn-lint-action@master
         with:
           args: "**/cloudformation.yml"

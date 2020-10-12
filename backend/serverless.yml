@@ -38,6 +38,12 @@ provider:
       Resource:
         - !GetAtt DataBucket.Arn
         - !Join [ '/', [ !GetAtt DataBucket.Arn, '*' ]  ]
+    - Effect: Allow
+      Action:
+        - sns:Publish
+      Resource:
+        - !Ref OnRefreshSuccessNotification
+        - !Ref OnRefreshFailureNotification
   environment:
     SERVICE_NAME: ${self:service}
     DATA_TABLE:
@@ -63,33 +69,22 @@ package:
 
 
 functions:
-
   RefreshDataFromSources:
     handler: us_covid_stats/etl/handler.refresh_data_from_sources
     events:
       - schedule: rate(1 hour)
-    destinations:
-      onSuccess: OnRefreshSuccess
-      onFailure: OnRefreshFailure
-  OnRefreshSuccess:
-    handler: us_covid_stats/etl/handler.on_refresh_success
-  OnRefreshFailure:
-    handler: us_covid_stats/etl/handler.on_refresh_failure
   GetData:
     handler: us_covid_stats/rest/handler.get_data
     events:
       - httpApi:
           method: GET
           path: /data
-  GetWeekly:
-    handler: us_covid_stats/rest/handler.get_weekly
-    events:
+      - httpApi:
+          method: GET
+          path: /daily
       - httpApi:
           method: GET
           path: /weekly
-  GetMonthly:
-    handler: us_covid_stats/rest/handler.get_monthly
-    events:
       - httpApi:
           method: GET
           path: /monthly
@@ -111,6 +106,20 @@ resources:
       Type: AWS::SNS::Topic
       Properties:
         DisplayName: Data refresh failed.
+        Subscription: ${self:custom.subscription.${self:custom.subscriptionEnabled}}
+    RefreshDataFromSourcesLambdaDestination:
+      Type: AWS::Lambda::EventInvokeConfig
+      Properties:
+        FunctionName:
+          Ref: RefreshDataFromSourcesLambdaFunction
+        DestinationConfig:
+          OnSuccess:
+            Destination:
+              Ref: OnRefreshSuccessNotification
+          OnFailure:
+            Destination:
+              Ref: OnRefreshFailureNotification
+        Qualifier: $LATEST
     DataTable: ${self:custom.cfResources.DataTable}
     DataBucket: ${self:custom.cfResources.DataBucket}
     FrontendBucket: ${self:custom.cfResources.FrontendBucket}
