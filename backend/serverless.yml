@@ -90,6 +90,23 @@ functions:
           path: /monthly
 
 resources:
+  extensions:
+    HttpApi:
+      Properties:
+        CorsConfiguration:
+          AllowOrigins:
+            - !Join ['', ['https://', !GetAtt FrontendDistribution.DomainName]]
+            - http://localhost:3000
+          AllowHeaders:
+            - Content-Type
+            - X-Amz-Date
+            - Authorization
+            - X-Api-Key
+            - X-Amz-Security-Token
+            - X-Amz-User-Agent
+          AllowMethods:
+            - OPTIONS
+            - GET
   Resources:
     ReactAppBackendUrlParameter:
       Type: AWS::SSM::Parameter

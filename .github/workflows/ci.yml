@@ -142,9 +142,8 @@ jobs:
 
       - name: Build frontend artifacts
         run: make build
-  cloudformation-linter:
+  cloudformation:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2.3.3
 

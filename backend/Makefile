@@ -77,5 +77,5 @@ build: clean ## Build the deployment package.
 
 
 .PHONY: deploy
-deploy: build ## Deploy the backend services.
+deploy: ## Deploy the backend services.
 	@yarn deploy

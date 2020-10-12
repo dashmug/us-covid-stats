@@ -1,4 +1,4 @@
-from collections import Callable, Iterable, Mapping
+from typing import Callable, Iterable, Mapping
 
 from pandas import DataFrame
 from us_covid_stats.infrastructure.api_gateway import Response
