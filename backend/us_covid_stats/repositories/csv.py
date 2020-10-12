@@ -10,14 +10,14 @@ from us_covid_stats.infrastructure.s3 import (
 CSV_FILENAME = "data.csv"
 
 
-def save_csv(df: DataFrame) -> Any:
+def dataframe_to_s3_csv(df: DataFrame) -> Any:
     buffer = StringIO()
     df.to_csv(buffer)
 
     return save_to_data_bucket(CSV_FILENAME, buffer)
 
 
-def get_csv() -> DataFrame:
+def s3_csv_to_dataframe() -> DataFrame:
     return read_csv(
         retrieve_from_data_bucket(CSV_FILENAME),
         index_col="date",

@@ -14,6 +14,6 @@ WORLD_RECOVERIES_URL = (
     f"{RAW_GITHUB_HOST}/datasets/covid-19/master/data/time-series-19-covid-combined.csv"
 )
 
-DATA_TABLE = os.getenv("DATA_TABLE", default=f"{SERVICE_NAME}-{STAGE}-Data")
+DATA_TABLE = os.getenv("DATA_TABLE")
 
 DATA_BUCKET = os.getenv("DATA_BUCKET")
