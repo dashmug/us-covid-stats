@@ -1,4 +1,4 @@
-from typing import Any, Mapping, TypedDict
+from typing import Mapping, TypedDict
 
 
 class Response(TypedDict):

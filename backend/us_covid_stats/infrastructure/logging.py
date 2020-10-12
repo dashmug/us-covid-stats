@@ -1,7 +1,7 @@
 import json
 import logging
 from functools import wraps
-from typing import Any, Callable, Mapping
+from typing import Any, Callable
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
