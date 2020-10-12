@@ -2,9 +2,11 @@ from typing import Any, Mapping
 
 from pandas import DataFrame
 from us_covid_stats.infrastructure.api_gateway import create_response
+from us_covid_stats.infrastructure.logging import log_event
 from us_covid_stats.repositories.cases import get_all_cases
 
 
+@log_event
 def get_data(event: Any, context: Any) -> Mapping[str, Any]:
     df = DataFrame(list(get_all_cases()))
 
