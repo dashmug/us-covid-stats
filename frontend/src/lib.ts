@@ -1,4 +1,9 @@
-export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
+export const dataEndpoint = `${BACKEND_URL}/data`;
+export const dailyEndpoint = `${BACKEND_URL}/daily`;
+export const weeklyEndpoint = `${BACKEND_URL}/weekly`;
+export const monthlyEndpoint = `${BACKEND_URL}/monthly`;
 
 export interface CaseData {
   date: string;

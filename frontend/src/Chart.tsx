@@ -1,20 +1,18 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
-import { CaseData, CaseDataColumn, seriesColors } from "./settings";
+import { CaseData, CaseDataColumn, seriesColors } from "./lib";
 
-interface MonthlyChartProps {
+interface DailyChartProps {
   data: CaseData[];
   column: CaseDataColumn;
   seriesName: string;
 }
 
-const MonthlyChart = ({ data, column, seriesName }: MonthlyChartProps) => {
+const Chart = ({ data, column, seriesName }: DailyChartProps) => {
   const series = [
     {
       name: seriesName,
-      data: data
-        .slice(0, -1)
-        .map(({ date, ...columns }) => [date, columns[column]]),
+      data: data.map(({ date, ...columns }) => [date, columns[column]]),
     },
   ];
 
@@ -49,4 +47,4 @@ const MonthlyChart = ({ data, column, seriesName }: MonthlyChartProps) => {
   );
 };
 
-export default MonthlyChart;
+export default Chart;

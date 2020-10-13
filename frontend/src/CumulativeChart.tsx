@@ -1,6 +1,6 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
-import { CaseData } from "./settings";
+import { CaseData } from "./lib";
 
 const CumulativeChart = ({ data }: { data: CaseData[] }) => {
   const series = [

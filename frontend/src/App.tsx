@@ -1,15 +1,13 @@
 import React, { SetStateAction, useEffect, useState } from "react";
 import CumulativeChart from "./CumulativeChart";
-import DailyChart from "./DailyChart";
+import Chart from "./Chart";
 import Summary from "./Summary";
-import MonthlyChart from "./MonthlyChart";
-import WeeklyChart from "./WeeklyChart";
-
-export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const dataEndpoint = `${BACKEND_URL}/data`;
-const dailyEndpoint = `${BACKEND_URL}/daily`;
-const weeklyEndpoint = `${BACKEND_URL}/weekly`;
-const monthlyEndpoint = `${BACKEND_URL}/monthly`;
+import {
+  dailyEndpoint,
+  dataEndpoint,
+  monthlyEndpoint,
+  weeklyEndpoint,
+} from "./lib";
 
 const fetcher = (
   url: string,
@@ -48,31 +46,23 @@ const App = () => {
         <div className="columns">
           <div className="column is-one-third">
             <h2 className="subtitle">New Cases</h2>
-            <DailyChart data={daily} column="cases" seriesName="Daily cases" />
-            <WeeklyChart
-              data={weekly}
-              column="cases"
-              seriesName="Weekly cases"
-            />
-            <MonthlyChart
-              data={monthly}
-              column="cases"
-              seriesName="Monthly cases"
-            />
+            <Chart data={daily} column="cases" seriesName="Daily cases" />
+            <Chart data={weekly} column="cases" seriesName="Weekly cases" />
+            <Chart data={monthly} column="cases" seriesName="Monthly cases" />
           </div>
           <div className="column is-one-third">
             <h2 className="subtitle">Recoveries</h2>
-            <DailyChart
+            <Chart
               data={daily}
               column="recoveries"
               seriesName="Daily recoveries"
             />
-            <WeeklyChart
+            <Chart
               data={weekly}
               column="recoveries"
               seriesName="Weekly recoveries"
             />
-            <MonthlyChart
+            <Chart
               data={monthly}
               column="recoveries"
               seriesName="Monthly recoveries"
@@ -80,38 +70,11 @@ const App = () => {
           </div>
           <div className="column is-one-third">
             <h2 className="subtitle">Deaths</h2>
-            <DailyChart
-              data={daily}
-              column="deaths"
-              seriesName="Daily deaths"
-            />
-            <WeeklyChart
-              data={weekly}
-              column="deaths"
-              seriesName="Weekly deaths"
-            />
-            <MonthlyChart
-              data={monthly}
-              column="deaths"
-              seriesName="Monthly deaths"
-            />
+            <Chart data={daily} column="deaths" seriesName="Daily deaths" />
+            <Chart data={weekly} column="deaths" seriesName="Weekly deaths" />
+            <Chart data={monthly} column="deaths" seriesName="Monthly deaths" />
           </div>
         </div>
-
-        {/*<div className="columns">*/}
-        {/*  <div className="column">*/}
-        {/*    <h2 className="subtitle">Total Cases</h2>*/}
-        {/*    <DailyChart />*/}
-        {/*  </div>*/}
-        {/*  <div className="column">*/}
-        {/*    <h2 className="subtitle">Recoveries</h2>*/}
-        {/*    <WeeklyChart />*/}
-        {/*  </div>*/}
-        {/*  <div className="column">*/}
-        {/*    <h2 className="subtitle">Deaths</h2>*/}
-        {/*    <MonthlyChart />*/}
-        {/*  </div>*/}
-        {/*</div>*/}
 
         <footer className="footer">
           <div className="content has-text-centered">
