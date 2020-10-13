@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Chart from "./Chart";
 
-const ChartFromAPI = ({ url }: { url: string }) => {
+export const withDataFromAPI = (url: string) => (BaseComponent: any) => () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -12,9 +11,7 @@ const ChartFromAPI = ({ url }: { url: string }) => {
     };
 
     fetchData();
-  }, [url]);
+  }, []);
 
-  return <Chart data={data} />;
+  return <BaseComponent data={data} />;
 };
-
-export default ChartFromAPI;

@@ -1,14 +1,8 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
+import { CaseData } from "./settings";
 
-interface CaseData {
-    date: string
-    cases: [number, number][]
-    recoveries: [number, number][]
-    deaths: [number, number][]
-}
-
-const Chart = ({ data }: { data: CaseData[]}) => {
+const CumulativeChart = ({ data }: { data: CaseData[] }) => {
   const series = [
     {
       name: "Total Cases",
@@ -30,10 +24,6 @@ const Chart = ({ data }: { data: CaseData[]}) => {
       zoom: {
         enabled: false,
       },
-    },
-    title: {
-      text: "Cases, Recoveries, Deaths",
-      align: "left",
     },
     colors: ["#008FFB", "#00E396", "#FF4560"],
     yaxis: {
@@ -59,9 +49,9 @@ const Chart = ({ data }: { data: CaseData[]}) => {
       options={options}
       series={series}
       type="line"
-      height={450}
+      height={400}
     />
   );
 };
 
-export default Chart;
+export default CumulativeChart;
