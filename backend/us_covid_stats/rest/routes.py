@@ -30,7 +30,7 @@ def handle_weekly(cases: Iterable[CaseData]) -> Response:
     )
     df["date"] = df["date"].dt.strftime("%Y-%m-%d")
 
-    return create_response_from_dataframe(df)
+    return create_response_from_dataframe(df[:-1])
 
 
 def handle_monthly(cases: Iterable[CaseData]) -> Response:
@@ -45,7 +45,7 @@ def handle_monthly(cases: Iterable[CaseData]) -> Response:
     )
     df["date"] = df["date"].dt.strftime("%Y-%m-%d")
 
-    return create_response_from_dataframe(df)
+    return create_response_from_dataframe(df[:-1])
 
 
 router: Mapping[str, Callable[[Iterable[CaseData]], Response]] = {
