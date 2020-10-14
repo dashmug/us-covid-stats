@@ -24,4 +24,4 @@ phases:
       - yarn install
   build:
     commands:
-      - make -C deploy
+      - make -C backend deploy
