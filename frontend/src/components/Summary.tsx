@@ -1,6 +1,6 @@
 import TodayCard from "./TodayCard";
 import React from "react";
-import { CaseData } from "./lib";
+import { CaseData } from "../lib";
 
 const Summary = ({ data }: { data: CaseData[] }) => (
   <div className="columns">

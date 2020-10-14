@@ -12,10 +12,9 @@ export interface CaseData {
   deaths: number;
 }
 
-export type CaseDataColumn = Exclude<keyof CaseData, "date">;
+export const seriesColors = ["#209cee", "#23d160", "#ff3860"];
 
-export const seriesColors: Record<CaseDataColumn, string> = {
-  cases: "#209cee",
-  recoveries: "#23d160",
-  deaths: "#ff3860",
-};
+export const latest = (n: number) => (xs: CaseData[]) => xs.slice(-n);
+
+export const monthName = (date: Date) =>
+  date.toLocaleString("default", { month: "long" });

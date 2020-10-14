@@ -1,18 +1,25 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
-import { CaseData, CaseDataColumn, seriesColors } from "./lib";
+import { CaseData, seriesColors } from "../lib";
 
-interface DailyChartProps {
+interface ChartProps {
   data: CaseData[];
-  column: CaseDataColumn;
-  seriesName: string;
+  range: (xs: CaseData[]) => CaseData[];
 }
 
-const Chart = ({ data, column, seriesName }: DailyChartProps) => {
+const Chart = ({ data, range }: ChartProps) => {
   const series = [
     {
-      name: seriesName,
-      data: data.map(({ date, ...columns }) => [date, columns[column]]),
+      name: "New Cases",
+      data: range(data).map(({ date, cases }) => [date, cases]),
+    },
+    {
+      name: "New Recoveries",
+      data: range(data).map(({ date, recoveries }) => [date, recoveries]),
+    },
+    {
+      name: "New Deaths",
+      data: range(data).map(({ date, deaths }) => [date, deaths]),
     },
   ];
 
@@ -22,7 +29,7 @@ const Chart = ({ data, column, seriesName }: DailyChartProps) => {
         enabled: false,
       },
     },
-    colors: [seriesColors[column]],
+    colors: seriesColors,
     yaxis: {
       labels: {
         formatter: (val: number) => val.toLocaleString(),
@@ -42,7 +49,7 @@ const Chart = ({ data, column, seriesName }: DailyChartProps) => {
       options={options}
       series={series}
       type="line"
-      height={150}
+      height={300}
     />
   );
 };

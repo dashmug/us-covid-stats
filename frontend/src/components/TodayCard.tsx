@@ -1,5 +1,5 @@
 import React from "react";
-import { CaseData } from "./lib";
+import { CaseData } from "../lib";
 
 interface TodayCardProps {
   data: CaseData[];
