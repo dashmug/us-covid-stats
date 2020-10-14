@@ -1,0 +1,114 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+
+Description: Sets up CodeBuild Projects for us-covid-stats
+
+
+Parameters:
+  GitHubRepo:
+    Type: String
+    Description: GitHub repo CodeBuild will listen to
+  GitHubBranch:
+    Type: String
+    Description: GitHub branch CodeBuild will respond to
+
+
+Resources:
+  FrontendCodeBuildServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: codebuild.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/PowerUserAccess
+        - arn:aws:iam::aws:policy/IAMReadOnlyAccess
+  FrontendBuildProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: us-covid-stats-deployment-frontend
+      Description: Deployment for Frontend
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        ImagePullCredentialsType: CODEBUILD
+        PrivilegedMode: false
+        Image: aws/codebuild/standard:4.0
+        EnvironmentVariables:
+          - Type: PLAINTEXT
+            Name: STAGE
+            Value: !Ref GitHubBranch
+        Type: LINUX_CONTAINER
+      Artifacts:
+        Type: NO_ARTIFACTS
+      BadgeEnabled: true
+      ServiceRole: !Ref FrontendCodeBuildServiceRole
+      Source:
+        GitCloneDepth: 1
+        Location: !Ref GitHubRepo
+        ReportBuildStatus: true
+        Type: GITHUB
+        BuildSpec: frontend/buildspec.yml
+        BuildStatusConfig:
+          Context: 'Continuous Deployment / Frontend'
+      TimeoutInMinutes: 60
+      Triggers:
+        Webhook: true
+        FilterGroups:
+          - - Type: EVENT
+              Pattern: PUSH
+            - Type: HEAD_REF
+              Pattern: !Ref GitHubBranch
+  BackendCodeBuildServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: codebuild.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/PowerUserAccess
+        - arn:aws:iam::aws:policy/IAMReadOnlyAccess
+  BackendBuildProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: us-covid-stats-deployment-backend
+      Description: Deployment for Backend
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        ImagePullCredentialsType: CODEBUILD
+        PrivilegedMode: false
+        Image: aws/codebuild/standard:4.0
+        EnvironmentVariables:
+          - Type: PLAINTEXT
+            Name: STAGE
+            Value: !Ref GitHubBranch
+        Type: LINUX_CONTAINER
+      Artifacts:
+        Type: NO_ARTIFACTS
+      BadgeEnabled: true
+      ServiceRole: !Ref BackendCodeBuildServiceRole
+      Source:
+        GitCloneDepth: 1
+        Location: !Ref GitHubRepo
+        ReportBuildStatus: true
+        Type: GITHUB
+        BuildSpec: backend/buildspec.yml
+        BuildStatusConfig:
+          Context: 'Continuous Deployment / Frontend'
+      TimeoutInMinutes: 60
+      Triggers:
+        Webhook: true
+        FilterGroups:
+          - - Type: EVENT
+              Pattern: PUSH
+            - Type: HEAD_REF
+              Pattern: !Ref GitHubBranch
