@@ -42,14 +42,12 @@ provider:
       Action:
         - sns:Publish
       Resource:
-        - !Ref OnRefreshSuccessNotification
-        - !Ref OnRefreshFailureNotification
+        - !Ref OnRefreshDataFromSourcesNotification
   environment:
     SERVICE_NAME: ${self:service}
-    DATA_TABLE:
-      Ref: DataTable
-    DATA_BUCKET:
-      Ref: DataBucket
+    DATA_TABLE: !Ref DataTable
+    DATA_BUCKET: !Ref DataBucket
+    NOTIFICATION_TOPIC: !Ref OnRefreshDataFromSourcesNotification
   httpApi:
     payload: '2.0'
     cors: true
@@ -73,6 +71,11 @@ functions:
     handler: us_covid_stats/etl/handler.refresh_data_from_sources
     events:
       - schedule: rate(1 hour)
+    destinations:
+      onSuccess: OnRefreshDataFromSources
+      onFailure: OnRefreshDataFromSources
+  OnRefreshDataFromSources:
+    handler: us_covid_stats/etl/handler.on_refresh_data_from_sources
   GetData:
     handler: us_covid_stats/rest/handler.get_data
     events:
@@ -114,29 +117,11 @@ resources:
         Name: REACT_APP_BACKEND_URL
         Type: String
         Value: !Join [ '', [ 'https://', !Ref HttpApi, '.execute-api.', !Ref 'AWS::Region', '.', !Ref 'AWS::URLSuffix' ] ]
-    OnRefreshSuccessNotification:
+    OnRefreshDataFromSourcesNotification:
       Type: AWS::SNS::Topic
       Properties:
-        DisplayName: Data refresh successful.
+        DisplayName: US COVID Stats
         Subscription: ${self:custom.subscription.${self:custom.subscriptionEnabled}}
-    OnRefreshFailureNotification:
-      Type: AWS::SNS::Topic
-      Properties:
-        DisplayName: Data refresh failed.
-        Subscription: ${self:custom.subscription.${self:custom.subscriptionEnabled}}
-    RefreshDataFromSourcesLambdaDestination:
-      Type: AWS::Lambda::EventInvokeConfig
-      Properties:
-        FunctionName:
-          Ref: RefreshDataFromSourcesLambdaFunction
-        DestinationConfig:
-          OnSuccess:
-            Destination:
-              Ref: OnRefreshSuccessNotification
-          OnFailure:
-            Destination:
-              Ref: OnRefreshFailureNotification
-        Qualifier: $LATEST
     DataTable: ${self:custom.cfResources.DataTable}
     DataBucket: ${self:custom.cfResources.DataBucket}
     FrontendBucket: ${self:custom.cfResources.FrontendBucket}

@@ -66,6 +66,11 @@ typecheck: ## Check type annotations.
 	@poetry run mypy
 
 
+.PHONY: test
+test: ## Run tests
+	@poetry run python -m pytest
+
+
 .PHONY: clean
 clean: ## Delete the deployment package.
 	@rm -rf .serverless
