@@ -1,0 +1,31 @@
+version: 0.2
+
+env:
+  shell: bash
+  parameter-store:
+    DATA_TABLE: DATA_TABLE
+    DATA_BUCKET: DATA_BUCKET
+    NOTIFICATION_TOPIC: NOTIFICATION_TOPIC
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+      nodejs: 12
+    commands:
+      - aws --version
+      - python --version
+      - echo "Installing poetry..."
+      - curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+      - node --version
+      - npm --version
+      - echo "Installing yarn..."
+      - npm install -g yarn
+  pre_build:
+    commands:
+      - source $HOME/.poetry/env
+      - make -C backend venv lint typecheck test
+      - yarn install
+  build:
+    commands:
+      - make -C deploy
