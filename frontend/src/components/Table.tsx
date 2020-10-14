@@ -12,7 +12,8 @@ const Table = ({
   data,
   range,
   dateColumn = "Day",
-  dateFormatter = (date) => date.toLocaleDateString(),
+  dateFormatter = (date) =>
+    date.toLocaleDateString(undefined, { month: "long", day: "numeric" }),
 }: TableProps) => {
   const mapper = (row: CaseData) => (
     <tr className="has-text-right">
