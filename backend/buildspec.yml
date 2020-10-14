@@ -2,10 +2,6 @@ version: 0.2
 
 env:
   shell: bash
-  parameter-store:
-    DATA_TABLE: DATA_TABLE
-    DATA_BUCKET: DATA_BUCKET
-    NOTIFICATION_TOPIC: NOTIFICATION_TOPIC
 
 phases:
   install:
