@@ -26,7 +26,7 @@ https://d21xiw2qs8azw2.cloudfront.net/
 Tech Stack
 ----------
 * Frontend
-  * React
+  * React in Typescript
   * Bulma CSS
   * Apex Charts
   * Hosted on S3 with a CloudFront CDN.
@@ -34,6 +34,7 @@ Tech Stack
   * REST API on API Gateway
   * Lambda Functions in Python
   * Database using DynamoDB
+  * S3 for file storage
 * ETL Workflow
   * ETL Lambda Functions in Python (using Pandas for Data Processing)
   * Schedule Triggered via CloudWatch/EventBridge Scheduled Event
