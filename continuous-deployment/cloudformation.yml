@@ -103,7 +103,7 @@ Resources:
         Type: GITHUB
         BuildSpec: backend/buildspec.yml
         BuildStatusConfig:
-          Context: 'Continuous Deployment / Frontend'
+          Context: 'Continuous Deployment / Backend'
       TimeoutInMinutes: 60
       Triggers:
         Webhook: true
