@@ -1,6 +1,6 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
-import { CaseData } from "./lib";
+import { CaseData, seriesColors } from "../lib";
 
 const CumulativeChart = ({ data }: { data: CaseData[] }) => {
   const series = [
@@ -25,14 +25,10 @@ const CumulativeChart = ({ data }: { data: CaseData[] }) => {
         enabled: false,
       },
     },
-    colors: ["#008FFB", "#00E396", "#FF4560"],
+    colors: seriesColors,
     yaxis: {
       labels: {
         formatter: (val: number) => val.toLocaleString(),
-        minWidth: 100,
-      },
-      title: {
-        text: "Cases",
       },
     },
     xaxis: {
