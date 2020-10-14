@@ -3,7 +3,7 @@ from typing import Any, TypedDict
 from us_covid_stats.etl.extract import extract_data_from_sources
 from us_covid_stats.etl.load import load_data_to_database
 from us_covid_stats.etl.transform import merge_cases_with_recoveries
-from us_covid_stats.infrastructure.logging import log_event, logger
+from us_covid_stats.infrastructure.logging import log_event
 from us_covid_stats.infrastructure.sns import notify
 
 
