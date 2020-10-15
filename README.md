@@ -1,5 +1,7 @@
 ![Continuous Integration](https://github.com/dashmug/us-covid-stats/workflows/Continuous%20Integration/badge.svg) 
-![CodeQL](https://github.com/dashmug/us-covid-stats/workflows/CodeQL/badge.svg)
+![CodeQL](https://github.com/dashmug/us-covid-stats/workflows/CodeQL/badge.svg) 
+
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=dashmug_us-covid-stats&metric=code_smells)](https://sonarcloud.io/dashboard?id=dashmug_us-covid-stats) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=dashmug_us-covid-stats&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=dashmug_us-covid-stats) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dashmug_us-covid-stats&metric=alert_status)](https://sonarcloud.io/dashboard?id=dashmug_us-covid-stats) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=dashmug_us-covid-stats&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=dashmug_us-covid-stats) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=dashmug_us-covid-stats&metric=security_rating)](https://sonarcloud.io/dashboard?id=dashmug_us-covid-stats)
 
 US COVID Stats
 ==============
@@ -13,8 +15,11 @@ Challenge
 [Event-Driven Python in AWS](https://acloudguru.com/blog/engineering/cloudguruchallenge-python-aws-etl)
 
 
+
 Outcome
 -------
+
+[Read my blog article about this project.](https://dev.to/dashmug/event-driven-python-in-aws-cloudguruchallenge-20la)
 
 |   | deployment status |
 |----------|-------------------|
