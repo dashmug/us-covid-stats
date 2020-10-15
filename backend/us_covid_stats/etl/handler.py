@@ -7,6 +7,7 @@ from us_covid_stats.infrastructure.logging import log_event
 from us_covid_stats.infrastructure.sns import notify
 
 
+@log_event
 def refresh_data_from_sources(event: Any, context: Any) -> str:
     extracted = extract_data_from_sources()
     transformed = merge_cases_with_recoveries(**extracted)

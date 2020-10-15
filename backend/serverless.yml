@@ -71,6 +71,15 @@ functions:
     handler: us_covid_stats/etl/handler.refresh_data_from_sources
     events:
       - schedule: rate(1 hour)
+      - cloudwatchEvent:
+          event:
+            source:
+              - aws.codebuild
+            detail-type:
+              - CodeBuild Build State Change
+            detail:
+              build-status:
+                - SUCCEEDED
     destinations:
       onSuccess: OnRefreshDataFromSources
       onFailure: OnRefreshDataFromSources
