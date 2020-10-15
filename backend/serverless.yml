@@ -70,7 +70,7 @@ functions:
   RefreshDataFromSources:
     handler: us_covid_stats/etl/handler.refresh_data_from_sources
     events:
-      - schedule: rate(1 hour)
+      - schedule: rate(1 day)
       - cloudwatchEvent:
           event:
             source:
