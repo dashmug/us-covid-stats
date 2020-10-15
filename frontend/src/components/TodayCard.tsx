@@ -27,9 +27,11 @@ const TodayCard = ({ data, column, backgroundClass }: TodayCardProps) => {
   return (
     <div className={`card has-text-centered ${backgroundClass}`}>
       <div className="card-content">
-        <p className="title is-4 has-text-info-dark">{latestStat} new cases</p>
+        <p className="title is-4 has-text-info-dark">
+          {latestStat.toLocaleString()} new cases
+        </p>
         <p className="subtitle is-6 has-text-info-dark">
-          {difference} from previous day
+          {difference.toLocaleString()} from previous day
         </p>
       </div>
     </div>

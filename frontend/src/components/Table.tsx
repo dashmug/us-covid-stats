@@ -18,9 +18,11 @@ const Table = ({
   const mapper = (row: CaseData) => (
     <tr className="has-text-right">
       <td>{dateFormatter(new Date(row.date))}</td>
-      <td className="has-text-info-dark">{row.cases}</td>
-      <td className="has-text-success-dark">{row.recoveries}</td>
-      <td className="has-text-danger-dark">{row.deaths}</td>
+      <td className="has-text-info-dark">{row.cases.toLocaleString()}</td>
+      <td className="has-text-success-dark">
+        {row.recoveries.toLocaleString()}
+      </td>
+      <td className="has-text-danger-dark">{row.deaths.toLocaleString()}</td>
     </tr>
   );
   return (
