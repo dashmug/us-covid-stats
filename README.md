@@ -3,6 +3,8 @@
 
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=dashmug_us-covid-stats&metric=code_smells)](https://sonarcloud.io/dashboard?id=dashmug_us-covid-stats) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=dashmug_us-covid-stats&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=dashmug_us-covid-stats) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dashmug_us-covid-stats&metric=alert_status)](https://sonarcloud.io/dashboard?id=dashmug_us-covid-stats) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=dashmug_us-covid-stats&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=dashmug_us-covid-stats) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=dashmug_us-covid-stats&metric=security_rating)](https://sonarcloud.io/dashboard?id=dashmug_us-covid-stats)
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/699f980e3c6ae9612991/maintainability)](https://codeclimate.com/github/dashmug/us-covid-stats/maintainability)
+
 US COVID Stats
 ==============
 
