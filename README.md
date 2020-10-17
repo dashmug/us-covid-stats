@@ -38,6 +38,7 @@ Tech Stack
   * Bulma CSS
   * Apex Charts
   * Hosted on S3 with a CloudFront CDN.
+  ![Frontend](images/Frontend.png?raw=true "Frontend")
 * REST API Backend
   * REST API on API Gateway
   * Lambda Functions in Python
@@ -45,9 +46,11 @@ Tech Stack
   * S3 for file storage
 * ETL Workflow
   * ETL Lambda Functions in Python (using Pandas for Data Processing)
-  * Schedule Triggered via CloudWatch/EventBridge Scheduled Event
+  * Workflow Triggered via CloudWatch/EventBridge Scheduled Event and via CodeBuild "Build Successful" event below.
+  ![ETL](images/ETL.png?raw=true "ETL")
 * Notifications
   * Email notifications provided by SNS
   * Triggered via Lambda Destinations in the ETL workflow
-  
+* Deployment Pipeline
+  * Separate CodeBuild Projects for frontend/backend. Both triggered via GitHub changes.  
    
