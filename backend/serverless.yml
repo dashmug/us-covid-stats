@@ -110,12 +110,12 @@ resources:
             - !Join ['', ['https://', !GetAtt FrontendDistribution.DomainName]]
             - http://localhost:3000
           AllowHeaders:
-            - Content-Type
-            - X-Amz-Date
-            - Authorization
-            - X-Api-Key
-            - X-Amz-Security-Token
-            - X-Amz-User-Agent
+            - authorization
+            - content-type
+            - x-amz-date
+            - x-amz-security-token
+            - x-amz-user-agent
+            - x-api-key
           AllowMethods:
             - OPTIONS
             - GET

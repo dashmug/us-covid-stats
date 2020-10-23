@@ -15,14 +15,21 @@ def extract_data_from_sources() -> ExtractedData:
         index_col="date",
         parse_dates=True,
     )
+
+    date_column = "Date"
+    country_region_column = "Country/Region"
+    recovered_column = "RECOVERED"
+
     world_recoveries: DataFrame = read_csv(
         WORLD_RECOVERIES_URL,
-        usecols=["Date", "Country/Region", "Recovered"],
-        index_col="Date",
+        usecols=[date_column, country_region_column, recovered_column],
+        index_col=date_column,
         parse_dates=True,
     )
-    is_us_recovery = world_recoveries["Country/Region"] == "US"
-    us_recoveries = world_recoveries[is_us_recovery].drop(columns=["Country/Region"])
+    is_us_recovery = world_recoveries[country_region_column] == "US"
+    us_recoveries = world_recoveries[is_us_recovery].drop(
+        columns=[country_region_column]
+    )
 
     return {
         "cases": us_cases,
