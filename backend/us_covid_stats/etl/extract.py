@@ -18,7 +18,7 @@ def extract_data_from_sources() -> ExtractedData:
 
     date_column = "Date"
     country_region_column = "Country/Region"
-    recovered_column = "RECOVERED"
+    recovered_column = "Recovered"
 
     world_recoveries: DataFrame = read_csv(
         WORLD_RECOVERIES_URL,
