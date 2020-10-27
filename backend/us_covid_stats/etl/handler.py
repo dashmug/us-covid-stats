@@ -1,4 +1,5 @@
-from typing import Any, TypedDict
+import json
+from typing import Any, Mapping, TypedDict, Union
 
 from us_covid_stats.etl.extract import extract_data_from_sources
 from us_covid_stats.etl.load import load_data_to_database
@@ -21,12 +22,16 @@ class RequestContext(TypedDict):
 
 class DestinationEvent(TypedDict):
     requestContext: RequestContext
-    responsePayload: str
+    responsePayload: Union[str, Mapping[str, Any]]
 
 
 @log_event
 def on_refresh_data_from_sources(event: DestinationEvent, context: Any) -> None:
+    if isinstance(event["responsePayload"], dict):
+        message = json.dumps(event["responsePayload"].get('errorMessage'))
+    else:
+        message = event["responsePayload"]
     notify(
-        message=event["responsePayload"],
+        message=message,
         condition=event["requestContext"]["condition"],
     )

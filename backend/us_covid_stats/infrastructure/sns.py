@@ -18,16 +18,3 @@ def notify(message: str, condition: str) -> Any:
             }
         },
     )
-
-
-def notify_failure(message: str) -> Any:
-    return topic.publish(
-        Message=message,
-        Subject="Data refresh unsuccessful.",
-        MessageAttributes={
-            "status": {
-                "DataType": "String",
-                "StringValue": "failure",
-            }
-        },
-    )
