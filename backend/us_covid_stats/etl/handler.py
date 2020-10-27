@@ -27,10 +27,11 @@ class DestinationEvent(TypedDict):
 
 @log_event
 def on_refresh_data_from_sources(event: DestinationEvent, context: Any) -> None:
-    if isinstance(event["responsePayload"], dict):
-        message = json.dumps(event["responsePayload"].get("errorMessage"))
-    else:
-        message = event["responsePayload"]
+    message = (
+        event["responsePayload"]
+        if isinstance(event["responsePayload"], str)
+        else json.dumps(event["responsePayload"].get("errorMessage"))
+    )
     notify(
         message=message,
         condition=event["requestContext"]["condition"],
