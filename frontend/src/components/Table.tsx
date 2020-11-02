@@ -15,8 +15,8 @@ const Table = ({
   dateFormatter = (date) =>
     date.toLocaleDateString(undefined, { month: "long", day: "numeric" }),
 }: TableProps) => {
-  const mapper = (row: CaseData) => (
-    <tr className="has-text-right">
+  const mapper = (row: CaseData, index: number) => (
+    <tr className="has-text-right" key={index}>
       <td>{dateFormatter(new Date(row.date))}</td>
       <td className="has-text-info-dark">{row.cases.toLocaleString()}</td>
       <td className="has-text-success-dark">

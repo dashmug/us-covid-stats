@@ -21,6 +21,8 @@ Challenge
 Outcome
 -------
 
+[Live demo](https://d21xiw2qs8azw2.cloudfront.net/)
+
 [Read my blog article about this project.](https://dev.to/dashmug/event-driven-python-in-aws-cloudguruchallenge-20la)
 
 |   | deployment status |
