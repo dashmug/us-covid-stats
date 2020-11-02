@@ -80,6 +80,8 @@ functions:
             detail:
               build-status:
                 - SUCCEEDED
+              project-name:
+                - us-covid-stats-deployment-backend
     destinations:
       onSuccess: OnRefreshDataFromSources
       onFailure: OnRefreshDataFromSources
