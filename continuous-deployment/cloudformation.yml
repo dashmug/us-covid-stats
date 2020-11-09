@@ -77,6 +77,24 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/PowerUserAccess
         - arn:aws:iam::aws:policy/IAMReadOnlyAccess
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+#                  - iam:AttachRolePolicy
+#                  - iam:CreateRole
+#                  - iam:DeleteRole
+#                  - iam:DeleteRolePolicy
+#                  - iam:DetachRolePolicy
+#                  - iam:GetRole
+#                  - iam:GetRolePolicy
+                  - iam:PassRole
+#                  - iam:PutRolePolicy
+#                  - iam:TagRole
+                Resource: "*"
   BackendBuildProject:
     Type: AWS::CodeBuild::Project
     Properties:
