@@ -48,6 +48,7 @@ provider:
     DATA_TABLE: !Ref DataTable
     DATA_BUCKET: !Ref DataBucket
     NOTIFICATION_TOPIC: !Ref OnRefreshDataFromSourcesNotification
+    FRONTEND_URL: !Join ['', ['https://', !GetAtt FrontendDistribution.DomainName]]
   httpApi:
     payload: '2.0'
     cors: true
