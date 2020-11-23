@@ -20,10 +20,10 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v2.3.3
+      - uses: actions/checkout@v2.3.4
 
       - name: Setup Virtualenv Cache
-        uses: actions/cache@v2.1.2
+        uses: actions/cache@v2.1.3
         id: virtualenv-cache
         with:
           path: ~/.cache/pypoetry/virtualenvs
@@ -65,7 +65,7 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Set up Yarn cache
-        uses: actions/cache@v2.1.0
+        uses: actions/cache@v2.1.3
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
@@ -74,7 +74,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Set up node_modules cache
-        uses: actions/cache@v2.1.0
+        uses: actions/cache@v2.1.3
         id: node-modules-cache
         with:
           path: node_modules
@@ -88,7 +88,7 @@ jobs:
         run: make node_modules
 
       - name: Set up Serverless cache
-        uses: actions/cache@v2.1.0
+        uses: actions/cache@v2.1.3
         with:
           path: ~/.cache/serverless-python-requirements
           key: ${{ runner.os }}-serverless-python-requirements-${{ hashFiles('poetry.lock') }}
@@ -109,7 +109,7 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v2.3.3
+      - uses: actions/checkout@v2.3.4
 
       - name: Set up Node 12.x
         uses: actions/setup-node@v2.1.2
@@ -121,7 +121,7 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Set up Yarn cache
-        uses: actions/cache@v2.1.0
+        uses: actions/cache@v2.1.3
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
@@ -130,7 +130,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Set up node_modules cache
-        uses: actions/cache@v2.1.0
+        uses: actions/cache@v2.1.3
         id: node-modules-cache
         with:
           path: node_modules
@@ -148,7 +148,7 @@ jobs:
   CloudFormation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.3.3
+      - uses: actions/checkout@v2.3.4
 
       - name: Lint CloudFormation files
         uses: scottbrenner/cfn-lint-action@master

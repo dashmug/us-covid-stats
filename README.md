@@ -30,7 +30,7 @@ Outcome
 | Backend  | ![Build Status](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiZGZHNUNDS0JqSnNVSlhyU21zdDB1VnNETVlSVDl6NlV3R3FadHB3TkhYMm1aZlpJNTE5R1NqYUJsOGxrMWgxdkJzQ0w1Y09ibU5TRm5ZYnM4NXR3Mk93PSIsIml2UGFyYW1ldGVyU3BlYyI6IjFkaHQvNkJBR05WK1ZJZWkiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)|
 | Frontend | ![Build Status](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiRjZFajBNNFlBcEpVall4VXgxTUY3SHFaR1hvcUtwd25lcjBqM21DQ0s2QU9RUityRDBNZXVjcnlpQ0N6SWl0dDdJSGRZRklmVXgwM1pKaDQ0a3M5NWtFPSIsIml2UGFyYW1ldGVyU3BlYyI6InF6aWtXVjJLc25HRklIY0UiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)|
 
-[![Challenge Outcome](images/preview.png?raw=true "Challenge Outcome")](https://d21xiw2qs8azw2.cloudfront.net/)
+[![Challenge Outcome](docs/images/preview.png?raw=true "Challenge Outcome")](https://d21xiw2qs8azw2.cloudfront.net/)
 
 
 Tech Stack
@@ -40,7 +40,7 @@ Tech Stack
   * Bulma CSS
   * Apex Charts
   * Hosted on S3 with a CloudFront CDN.
-  ![Frontend](images/Frontend.png?raw=true "Frontend")
+  ![Frontend](docs/images/Frontend.png?raw=true "Frontend")
 * REST API Backend
   * REST API on API Gateway
   * Lambda Functions in Python
@@ -49,7 +49,7 @@ Tech Stack
 * ETL Workflow
   * ETL Lambda Functions in Python (using Pandas for Data Processing)
   * Workflow Triggered via CloudWatch/EventBridge Scheduled Event and via CodeBuild "Build Successful" event below.
-  ![ETL](images/ETL.png?raw=true "ETL")
+  ![ETL](docs/images/ETL.png?raw=true "ETL")
 * Notifications
   * Email notifications provided by SNS
   * Triggered via Lambda Destinations in the ETL workflow
