@@ -2,5 +2,8 @@
   "name": "us-covid-stats",
   "version": "0.1.0",
   "private": true,
-  "workspaces": ["frontend", "backend"]
+  "workspaces": [
+    "frontend",
+    "backend"
+  ]
 }
