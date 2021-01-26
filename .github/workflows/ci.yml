@@ -32,7 +32,7 @@ jobs:
             ${{ runner.os }}-poetry-
 
       - name: Set up Python 3.8
-        uses: actions/setup-python@v2.1.4
+        uses: actions/setup-python@v2.2.1
         with:
           python-version: 3.8
 
@@ -56,7 +56,7 @@ jobs:
         run: make test
 
       - name: Set up Node 12.x
-        uses: actions/setup-node@v2.1.2
+        uses: actions/setup-node@v2.1.4
         with:
           node-version: '12.x'
 
@@ -105,14 +105,14 @@ jobs:
         working-directory: frontend
     steps:
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.6.0
+        uses: styfle/cancel-workflow-action@0.7.0
         with:
           access_token: ${{ github.token }}
 
       - uses: actions/checkout@v2.3.4
 
       - name: Set up Node 12.x
-        uses: actions/setup-node@v2.1.2
+        uses: actions/setup-node@v2.1.4
         with:
           node-version: '12.x'
 
