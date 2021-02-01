@@ -71,8 +71,11 @@ functions:
   RefreshDataFromSources:
     handler: us_covid_stats/etl/handler.refresh_data_from_sources
     events:
-      - schedule: rate(1 day)
+      - schedule:
+          enabled: false
+          rate: rate(1 day)
       - cloudwatchEvent:
+          enabled: false
           event:
             source:
               - aws.codebuild
