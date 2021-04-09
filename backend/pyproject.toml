@@ -18,7 +18,7 @@ pdbpp = "^0.10.2"
 ipython = "^7.19.0"
 mypy = "^0.800"
 pytest = "^6.2.2"
-boto3 = "^1.16.63"
+boto3 = "^1.17.48"
 
 [tool.black]
 target-version = ['py38']
