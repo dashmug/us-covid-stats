@@ -37,7 +37,7 @@ jobs:
           python-version: 3.8
 
       - name: Setup Poetry
-        uses: Gr1N/setup-poetry@v4
+        uses: Gr1N/setup-poetry@v7
 
       - name: Install Python Dependencies
         if: steps.virtualenv-cache.outputs.cache-hit != 'true'
